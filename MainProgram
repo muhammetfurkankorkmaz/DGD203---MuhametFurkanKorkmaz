@@ -1,0 +1,132 @@
+using System;
+using System.Threading;
+
+namespace CarProject
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Hi, Welcome to car simulation.");
+            Thread.Sleep(1000);
+            Console.WriteLine("Choose car color and brand then try to go as fast as possible.");
+            Thread.Sleep(1000);
+            Console.ForegroundColor = ConsoleColor.White;
+
+            bool isInCar = true;
+            ColorPicker colorPicker = new ColorPicker();
+            BrandPicker brandPicker = new BrandPicker();
+            CarActions carActions = new CarActions();
+            while (isInCar)
+            {
+
+
+                while (!carActions.isDead)
+                {
+
+                    EnterCar();
+                    Console.WriteLine("Press enter to continue.");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+                if (carActions.isDead)
+
+                {
+                    CarDied();
+
+
+
+                }
+            }
+            void EnterCar()
+            {
+                while (true)
+                {
+                    Console.WriteLine("Choose an action");
+                    Console.WriteLine("1 - Choose car color");
+                    Console.WriteLine("2 - Choose car brand");
+                    Console.WriteLine("3 - Start the car");
+                    Console.WriteLine("4 - Stop the car");
+                    Console.WriteLine("5 - Accelerate");
+                    Console.WriteLine("6 - Deaccelerate");
+                    Console.WriteLine("7 - Car Information");
+                    string actionName = Console.ReadLine();
+
+                    if (actionName == "1")
+                    {
+                        colorPicker.AskColor();
+
+                        break;
+                    }
+                    else if (actionName == "2")
+                    {
+                        brandPicker.AskBrand();
+                        break;
+                    }
+                    else if (actionName == "3")
+                    {
+                        carActions.StartCar();
+                        break;
+                    }
+                    else if (actionName == "4")
+                    {
+                        carActions.StopCar();
+                        break;
+                    }
+                    else if (actionName == "5")
+                    {
+                        carActions.AccelerateCar();
+                        break;
+                    }
+                    else if (actionName == "6")
+                    {
+                        carActions.DeaccelerateCar();
+                        break;
+                    }
+                    else if (actionName == "7")
+                    {
+                        Console.WriteLine($"Your current car color is {colorPicker.currentCarColor} and current brand is {brandPicker.currentCarBrand}");
+                        break;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Beep();
+                        Console.WriteLine("You didn't give an appropriate answer. Please try again.");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+
+                }
+            }
+            void CarDied()
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+
+                Console.WriteLine("YOU DIED");
+                Console.WriteLine("Retry Y/N");
+
+                string answer = Console.ReadLine().ToLower();
+
+                if (answer == "y")
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                    Console.WriteLine("Restarting game");
+                    carActions.Resurrect();
+
+                }
+                else if (answer == "n")
+                {
+                    Console.WriteLine("Exiting game :(");
+                    isInCar = false;
+
+                }
+                else
+                {
+                    Console.WriteLine("Answer is not appropriate. Exiting Car :(");
+                }
+            }
+        }
+    }
+}
