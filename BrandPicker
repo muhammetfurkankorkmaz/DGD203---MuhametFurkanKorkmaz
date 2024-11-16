@@ -1,0 +1,69 @@
+using System;
+
+namespace CarProject
+{
+    internal class BrandPicker
+    {
+        public enum CarBrand
+        {
+            Null,
+            Toyota,
+            Volkswagen,
+            Mercedes,
+            Ferrari,
+
+
+        }
+        public CarBrand currentCarBrand { get; private set; } = CarBrand.Null;
+        public void AskBrand()//Asks the user color and records the color
+
+        {
+            while (true)
+            {
+                Console.WriteLine("Choose a car brand");
+                Console.WriteLine("1 - Toyota");
+                Console.WriteLine("2 - Volkswagen");
+                Console.WriteLine("3 - Mercedes");
+                Console.WriteLine("4 - Ferrari");
+                string brandName = Console.ReadLine();
+
+
+
+                if (brandName == "1")
+                {
+                    currentCarBrand = CarBrand.Toyota;
+                    Console.WriteLine("Your current car brand is " + currentCarBrand.ToString());
+                    break;
+
+                }
+                else if (brandName == "2")
+                {
+                    currentCarBrand = CarBrand.Volkswagen;
+                    Console.WriteLine("Your current car brand is " + currentCarBrand.ToString());
+                    break;
+                }
+                else if (brandName == "3")
+                {
+                    currentCarBrand = CarBrand.Mercedes;
+                    Console.WriteLine("Your current car brand is " + currentCarBrand.ToString());
+                    break;
+                }
+                else if (brandName == "4")
+                {
+                    currentCarBrand = CarBrand.Ferrari;
+                    Console.WriteLine("Your current car brand is " + currentCarBrand.ToString());
+                    break;
+                }
+                
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Beep();
+                    Console.WriteLine("You didn't give an appropiate answer. Please try again.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }//Loop
+        }
+    }//Class
+}//NameSpace
+
