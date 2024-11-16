@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace CarProject
+{
+    internal class ColorPicker
+    {
+        public enum CarColor
+        {
+            Null,
+            Black,
+            White,
+            Blue,
+            Green,
+            Red
+        }
+        public CarColor currentCarColor { get; private set; } = CarColor.Null;
+        public void AskColor()//Asks the user color and records the color
+
+        {
+            while (true)
+            {
+                Console.WriteLine("Choose a car color");
+                Console.WriteLine("1 - Black");
+                Console.WriteLine("2 - White");
+                Console.WriteLine("3 - Blue");
+                Console.WriteLine("4 - Green");
+                Console.WriteLine("5 - Red");
+                string colorName = Console.ReadLine();
+
+
+
+                if (colorName == "1")
+                {
+                    currentCarColor = CarColor.Black;
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.WriteLine("Your current car color is " +currentCarColor.ToString());
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+
+                }
+                else if (colorName == "2")
+                {
+                    currentCarColor = CarColor.White;
+                    Console.WriteLine("Your current car color is " + currentCarColor.ToString());
+                    break;
+                }
+                else if (colorName == "3")
+                {
+                    currentCarColor = CarColor.Blue;
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("Your current car color is " + currentCarColor.ToString());
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+                }
+                else if (colorName == "4")
+                {
+                    currentCarColor = CarColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Your current car color is " + currentCarColor.ToString());
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+                }
+                else if (colorName == "5")
+                {
+                    currentCarColor = CarColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Your current car color is " + currentCarColor.ToString());
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Beep();
+                    Console.WriteLine("You didn't give an appropiate answer. Please try again.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }//Loop
+        }
+    }//Class
+}//NameSpace
