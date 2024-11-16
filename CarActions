@@ -1,0 +1,79 @@
+using System;
+
+
+namespace CarProject
+{
+    internal class CarActions
+    {
+        public bool isDead { get; private set; } = false;
+        Random rng = new Random();
+        bool isCarStarted = false;
+
+        int carSpeed;
+        public void StartCar()
+        {
+            isCarStarted = true;
+            Console.WriteLine("Car has started , current speed is " + carSpeed);
+        }
+        public void StopCar()
+        {
+            isCarStarted = false;
+            carSpeed = 0;
+            Console.WriteLine("Car has stopped, current speed is " + carSpeed);
+        }
+        public void AccelerateCar()
+        {
+            if (isCarStarted)
+            {
+                carSpeed += 50;
+                Console.WriteLine("Car speed increased, current speed is " + carSpeed);
+                if (carSpeed >= 100)
+                {
+                    int deathChance = rng.Next(0, 100);
+                    if (deathChance < carSpeed / 10)
+                    {
+                        //NEEDS TO RESTART THE GAME
+                        isDead = true;
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("You Died");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                }
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Car is stopped, can not accelerate");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+
+        }
+        public void DeaccelerateCar()
+        {
+            if (isCarStarted)
+            {
+                if (carSpeed > 0)
+                {
+                    carSpeed -= 50;
+                    Console.WriteLine("Car speed decreased, current speed is " + carSpeed);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Car speed is already 0");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Car is stopped, can not deaccelerate");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+        }
+        public void Resurrect()
+        {
+            isDead = false;
+        }
+    }
+}
